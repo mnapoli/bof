@@ -16,16 +16,17 @@ To sum up, Bof:
 
 - is user friendly
 - avoids magic strings and arrays for configuration: instead it provides explicit, typed and documented methods that can be autocompleted by IDEs
-- comes with sane defaults:
-    - invalid HTTP responses throw exceptions
-    - JSON is supported natively
-    - short timeouts
-- PSR-7 compliant
+- comes with sane defaults: JSON is supported natively, 4xx and 5xx responses throw exceptions, timeouts are short by default
+- is PSR-7 compliant
 
 Future plans:
 
 - PSR-18 compliance (the HTTP client standard)
 - resiliency mechanisms such as retry, backoff, etc.
+
+## Do we need a new HTTP client?
+
+Probably not. If this client attracts interest, that may mean that our already popular HTTP clients could use a simpler API targeting the simple use cases. If you maintain a HTTP client and are interested, I would definitely be interested to merge Bof into an existing libraries and making it obsolete. Get in touch!
 
 ## Installation
 
@@ -43,12 +44,14 @@ $response = $http->get('https://example.com/api/products');
 
 ### Configuration
 
-The `Bof\Http` class is **immutable**. Configuration is applied by calling `withXxx()` methods which create a new object every time:
+**The `Bof\Http` class is immutable**.
+
+Configuration is applied by calling `withXxx()` methods which create a new object every time:
 
 ```php
 $http = new Bof\Http;
 
-// The header will apply to all requests
+// The header will apply to all subsequent requests
 $http = $http->withHeader('Authorization', "Bearer $token");
 ```
 
@@ -60,6 +63,7 @@ $http1 = new Bof\Http;
 $http2 = $http1->withHeader('Authorization', "Bearer $token");
 
 // $http1 does not have the header applied
+// $http2 has the header
 ```
 
 Thanks to that pattern, the same methods can be used to apply configuration only for a specific request:
@@ -84,6 +88,17 @@ $products = $http->get('https://example.com/api/products')
 ```
 
 The `toArray()` method will decode the JSON response and validate that it is an array.
+
+All PSR-7 methods are also available:
+
+```php
+$response = $http->get('https://example.com/api/products');
+echo $response->getStatusCode();
+echo $response->getHeader('Content-Length')[0];
+echo $response->getBody()->getContents();
+```
+
+[Learn more](http://docs.guzzlephp.org/en/stable/quickstart.html#using-responses).
 
 ### Sending JSON data
 
@@ -223,3 +238,5 @@ $guzzleClient = new GuzzleHttp\Client([
 
 $http = new Bof\Http($guzzleClient);
 ```
+
+[Learn more](http://docs.guzzlephp.org/en/stable/request-options.html).
