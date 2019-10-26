@@ -71,7 +71,7 @@ Thanks to that pattern, the same methods can be used to apply configuration only
 ```php
 $products = $http->withHeader('Authorization', "Bearer $token")
     ->get('https://example.com/api/products')
-    ->toArray();
+    ->getData();
 
 // The next requests will *not* have the `Authorization` header
 ```
@@ -84,10 +84,10 @@ Responses are PSR-7 compliant. They also provide methods to facilitate working w
 $http = new Bof\Http;
 
 $products = $http->get('https://example.com/api/products')
-    ->toArray();
+    ->getData();
 ```
 
-The `toArray()` method will decode the JSON response and validate that it is an array.
+The `getData()` method will decode the JSON response.
 
 All PSR-7 methods are also available:
 
@@ -122,28 +122,6 @@ $http->postForm('https://example.com/api/products', [
 ]);
 // putForm() works as well
 ```
-
-### Sending multipart data
-
-Multipart data can be sent as well:
-
-```php
-$http->postMultipart('https://example.com/api/products', [
-    [
-        'name'     => 'foo',
-        'contents' => 'data',
-        'headers'  => ['X-Baz' => 'bar']
-    ],
-    [
-        'name'     => 'baz',
-        'contents' => fopen('/path/to/file', 'r'),
-        'filename' => 'custom_filename.txt'
-    ],
-]);
-// putMultipart() works as well
-```
-
-[Learn more](http://docs.guzzlephp.org/en/stable/request-options.html#multipart).
 
 ### Exceptions
 
@@ -206,7 +184,7 @@ $http->withQueryParams('foo=bar')
     ->get('http://httpbin.org');
 ```
 
-### Timeouts
+### Proxy
 
 Use `withSingleProxy()` to specify a proxy for all protocols:
 
