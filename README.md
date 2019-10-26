@@ -31,7 +31,7 @@ Want a short illustration? Here is Bof compared to Guzzle:
 $http = new Bof\Http;
 $createdProduct = $http
     ->withHeader('Authorization', 'Token abcd')
-    ->post('https://example.com/api/products', [
+    ->postJson('https://example.com/api/products', [
         'Hello' => 'world',
     ])
     ->getData();
