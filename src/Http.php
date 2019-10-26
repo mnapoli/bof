@@ -44,7 +44,7 @@ class Http
     public function get(string $url): HttpResponse
     {
         $response = $this->client->request('GET', $url, $this->requestOptions());
-        return new HttpResponse($response);
+        return HttpResponse::fromGuzzleResponse($response);
     }
 
     /**
@@ -53,7 +53,7 @@ class Http
     public function delete(string $url): HttpResponse
     {
         $response = $this->client->request('DELETE', $url, $this->requestOptions());
-        return new HttpResponse($response);
+        return HttpResponse::fromGuzzleResponse($response);
     }
 
     /**
@@ -151,7 +151,7 @@ class Http
         $requestOptions[RequestOptions::JSON] = $data;
         $response = $this->client->request($method, $url, $requestOptions);
 
-        return new HttpResponse($response);
+        return HttpResponse::fromGuzzleResponse($response);
     }
 
     /**
@@ -163,7 +163,7 @@ class Http
         $requestOptions[RequestOptions::FORM_PARAMS] = $data;
         $response = $this->client->request($method, $url, $requestOptions);
 
-        return new HttpResponse($response);
+        return HttpResponse::fromGuzzleResponse($response);
     }
 
     private function requestOptions(): array
