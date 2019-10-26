@@ -24,4 +24,5 @@ before_script:
 
 script:
   - vendor/bin/composer-require-checker check --ignore-parse-errors
+  - vendor/bin/psalm
   - vendor/bin/phpunit
