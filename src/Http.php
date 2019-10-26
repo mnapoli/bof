@@ -175,6 +175,7 @@ class Http
 
     /**
      * @return array<string,mixed>
+     * @psalm-mutation-free
      */
     private function requestOptions(): array
     {

@@ -19,6 +19,9 @@ class HttpResponse extends Response
         );
     }
 
+    /**
+     * @psalm-external-mutation-free
+     */
     public function getBodyAsString(): string
     {
         return (string) $this->getBody();
@@ -36,6 +39,7 @@ class HttpResponse extends Response
     /**
      * @return mixed
      * @throws JsonException When decoding JSON fails.
+     * @psalm-pure
      */
     private function decodeJson(string $json)
     {
