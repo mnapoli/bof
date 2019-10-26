@@ -24,6 +24,35 @@ Future plans:
 - PSR-18 compliance (the HTTP client standard)
 - resiliency mechanisms such as retry, backoff, etc.
 
+Want a short illustration? Here is Bof compared to Guzzle:
+
+```php
+// Bof
+$http = new Bof\Http;
+$createdProduct = $http
+    ->withHeader('Authorization', 'Token abcd')
+    ->post('https://example.com/api/products', [
+        'Hello' => 'world',
+    ])
+    ->getData();
+
+// Guzzle
+$client = new GuzzleHttp\Client([
+    'headers' => [
+        'Authorization' => 'Token abcd',
+    ],
+]);
+$response = $client->request('POST', 'https://example.com/api/products', [
+   'json' => [
+        'Hello' => 'world',
+   ]
+]);
+$createdProduct = json_decode($response->getBody()->__toString(), true);
+if (json_last_error() !== JSON_ERROR_NONE) {
+    throw new Exception('There was an error while decoding the JSON response');
+}
+```
+
 ## Do we need a new HTTP client?
 
 Probably not. If this client attracts interest, that may mean that our already popular HTTP clients could use a simpler API targeting the simple use cases. If you maintain a HTTP client and are interested, I would love to merge Bof into existing libraries. Open an issue!
