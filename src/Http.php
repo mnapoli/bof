@@ -84,7 +84,7 @@ class Http
     }
 
     /**
-     * @param mixed $data
+     * @param array<array-key,mixed> $data
      * @throws GuzzleException
      */
     public function postForm(string $url, array $data): HttpResponse
@@ -93,7 +93,7 @@ class Http
     }
 
     /**
-     * @param mixed $data
+     * @param array<array-key,mixed> $data
      * @throws GuzzleException
      */
     public function putForm(string $url, array $data): HttpResponse
@@ -161,6 +161,7 @@ class Http
     }
 
     /**
+     * @param array<array-key, mixed> $data
      * @throws GuzzleException
      */
     private function sendForm(string $method, string $url, array $data): HttpResponse
@@ -172,6 +173,9 @@ class Http
         return HttpResponse::fromGuzzleResponse($response);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     private function requestOptions(): array
     {
         return [

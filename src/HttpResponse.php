@@ -4,10 +4,11 @@ namespace Bof;
 
 use GuzzleHttp\Psr7\Response;
 use JsonException;
+use Psr\Http\Message\ResponseInterface;
 
 class HttpResponse extends Response
 {
-    public static function fromGuzzleResponse(Response $guzzleResponse): self
+    public static function fromGuzzleResponse(ResponseInterface $guzzleResponse): self
     {
         return new self(
             $guzzleResponse->getStatusCode(),
@@ -24,9 +25,10 @@ class HttpResponse extends Response
     }
 
     /**
+     * @return mixed
      * @throws JsonException When decoding JSON fails.
      */
-    public function getData(): array
+    public function getData()
     {
         return $this->decodeJson($this->getBodyAsString());
     }
