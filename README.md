@@ -26,7 +26,7 @@ Future plans:
 
 ## Do we need a new HTTP client?
 
-Probably not. If this client attracts interest, that may mean that our already popular HTTP clients could use a simpler API targeting the simple use cases. If you maintain a HTTP client and are interested, I would definitely be interested to merge Bof into a existing libraries. Get in touch!
+Probably not. If this client attracts interest, that may mean that our already popular HTTP clients could use a simpler API targeting the simple use cases. If you maintain a HTTP client and are interested, I would love to merge Bof into existing libraries. Open an issue!
 
 ## Installation
 
