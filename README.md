@@ -4,6 +4,8 @@ The HTTP client for humans.
 [![Latest Version](https://img.shields.io/github/release/mnapoli/bof.svg?style=flat-square)](https://packagist.org/packages/mnapoli/bof)
 [![Total Downloads](https://img.shields.io/packagist/dt/mnapoli/bof.svg?style=flat-square)](https://packagist.org/packages/mnapoli/bof)
 
+![](img/logo.png)
+
 ## Why?
 
 Bof is a HTTP client meant to be as user friendly as possible.
