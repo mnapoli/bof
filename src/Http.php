@@ -57,6 +57,7 @@ class Http
     }
 
     /**
+     * @param mixed $data
      * @throws GuzzleException
      */
     public function postJson(string $url, $data): HttpResponse
@@ -65,6 +66,7 @@ class Http
     }
 
     /**
+     * @param mixed $data
      * @throws GuzzleException
      */
     public function putJson(string $url, $data): HttpResponse
@@ -73,6 +75,7 @@ class Http
     }
 
     /**
+     * @param mixed $data
      * @throws GuzzleException
      */
     public function patchJson(string $url, $data): HttpResponse
@@ -81,6 +84,7 @@ class Http
     }
 
     /**
+     * @param mixed $data
      * @throws GuzzleException
      */
     public function postForm(string $url, array $data): HttpResponse
@@ -89,6 +93,7 @@ class Http
     }
 
     /**
+     * @param mixed $data
      * @throws GuzzleException
      */
     public function putForm(string $url, array $data): HttpResponse
@@ -97,7 +102,7 @@ class Http
     }
 
     /**
-     * @param string|array<int, string> $value
+     * @param string|array<int,string> $value
      */
     public function withHeader(string $name, $value): self
     {
@@ -143,6 +148,7 @@ class Http
     }
 
     /**
+     * @param mixed $data
      * @throws GuzzleException
      */
     private function sendJson(string $method, string $url, $data): HttpResponse
