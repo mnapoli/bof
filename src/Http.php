@@ -35,6 +35,7 @@ class Http
         $guzzle = new Client([
             'handler' => HandlerStack::create($mock),
         ]);
+
         return new self($guzzle);
     }
 
@@ -44,6 +45,7 @@ class Http
     public function get(string $url): HttpResponse
     {
         $response = $this->client->request('GET', $url, $this->requestOptions());
+
         return HttpResponse::fromGuzzleResponse($response);
     }
 
@@ -53,6 +55,7 @@ class Http
     public function delete(string $url): HttpResponse
     {
         $response = $this->client->request('DELETE', $url, $this->requestOptions());
+
         return HttpResponse::fromGuzzleResponse($response);
     }
 
@@ -108,6 +111,7 @@ class Http
     {
         $http = clone $this;
         $http->headers[$name] = $value;
+
         return $http;
     }
 
@@ -116,6 +120,7 @@ class Http
         $http = clone $this;
         $http->requestTimeout = $timeout;
         $http->connectionTimeout = $connectionTimeout;
+
         return $http;
     }
 
@@ -123,6 +128,7 @@ class Http
     {
         $http = clone $this;
         $http->proxy = $proxy;
+
         return $http;
     }
 
@@ -134,6 +140,7 @@ class Http
             'https' => $httpsProxy, // Use this proxy with "https"
             'no' => $notProxiedDomains, // Don't use a proxy with these domains
         ];
+
         return $http;
     }
 
@@ -144,6 +151,7 @@ class Http
     {
         $http = clone $this;
         $http->queryParams = $queryParams;
+
         return $http;
     }
 
@@ -175,6 +183,7 @@ class Http
 
     /**
      * @return array<string,mixed>
+     *
      * @psalm-mutation-free
      */
     private function requestOptions(): array

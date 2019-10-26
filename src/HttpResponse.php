@@ -39,6 +39,7 @@ class HttpResponse extends Response
     /**
      * @return mixed
      * @throws JsonException When decoding JSON fails.
+     *
      * @psalm-pure
      */
     private function decodeJson(string $json)
