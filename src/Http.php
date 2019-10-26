@@ -19,12 +19,12 @@ class Http
     private $requestTimeout = 5.;
     /** @var float Number of seconds to wait while trying to connect to the server. Use 0 to wait indefinitely. */
     private $connectionTimeout = 3.;
-    /** @var null|string|array<string, string|array> */
+    /** @var string|array<string, string|array>|null */
     private $proxy;
-    /** @var null|string|array */
+    /** @var string|array|null */
     private $queryParams;
 
-    public function __construct(ClientInterface $client = null)
+    public function __construct(?ClientInterface $client = null)
     {
         $this->client = $client ?: new Client;
     }
@@ -37,7 +37,7 @@ class Http
         ]);
         return new self($guzzle);
     }
-    
+
     /**
      * @throws GuzzleException
      */
