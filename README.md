@@ -2,7 +2,6 @@ The HTTP client for humans.
 
 [![Build Status](https://img.shields.io/travis/com/mnapoli/bof/master.svg?style=flat-square)](https://travis-ci.com/mnapoli/bof)
 [![Latest Version](https://img.shields.io/github/release/mnapoli/bof.svg?style=flat-square)](https://packagist.org/packages/mnapoli/bof)
-[![Total Downloads](https://img.shields.io/packagist/dt/mnapoli/bof.svg?style=flat-square)](https://packagist.org/packages/mnapoli/bof)
 
 ![](img/logo.png)
 
