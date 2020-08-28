@@ -17,9 +17,9 @@ class HttpTest extends TestCase
             new Response(200, ['X-Foo' => 'Bar'], 'OK!'),
         ]);
         $response = $http->get('https://example.com');
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('OK!', $response->getBodyAsString());
-        $this->assertEquals('Bar', $response->getHeaderLine('X-Foo'));
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame('OK!', $response->getBodyAsString());
+        $this->assertSame('Bar', $response->getHeaderLine('X-Foo'));
     }
 
     public function test delete(): void
@@ -28,7 +28,7 @@ class HttpTest extends TestCase
             new Response(200),
         ]);
         $response = $http->delete('https://example.com');
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertSame(200, $response->getStatusCode());
     }
 
     public function test post json(): void
@@ -44,10 +44,10 @@ class HttpTest extends TestCase
             'foo' => 'bar',
         ]);
 
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('{"foo":"bar"}', $response->getBodyAsString());
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame('{"foo":"bar"}', $response->getBodyAsString());
         // Check the header was added automatically
-        $this->assertEquals('application/json', $response->getHeaderLine('X-Encoding'));
+        $this->assertSame('application/json', $response->getHeaderLine('X-Encoding'));
         // Check the JSON can be decoded
         $this->assertEquals(['foo' => 'bar'], $response->getData());
     }
@@ -65,10 +65,10 @@ class HttpTest extends TestCase
             'foo' => 'bar',
         ]);
 
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('{"foo":"bar"}', $response->getBodyAsString());
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame('{"foo":"bar"}', $response->getBodyAsString());
         // Check the header was added automatically
-        $this->assertEquals('application/json', $response->getHeaderLine('X-Encoding'));
+        $this->assertSame('application/json', $response->getHeaderLine('X-Encoding'));
         // Check the JSON can be decoded
         $this->assertEquals(['foo' => 'bar'], $response->getData());
     }
@@ -86,10 +86,10 @@ class HttpTest extends TestCase
             'foo' => 'bar',
         ]);
 
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('{"foo":"bar"}', $response->getBodyAsString());
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame('{"foo":"bar"}', $response->getBodyAsString());
         // Check the header was added automatically
-        $this->assertEquals('application/json', $response->getHeaderLine('X-Encoding'));
+        $this->assertSame('application/json', $response->getHeaderLine('X-Encoding'));
         // Check the JSON can be decoded
         $this->assertEquals(['foo' => 'bar'], $response->getData());
     }
@@ -108,10 +108,10 @@ class HttpTest extends TestCase
             'baz' => ['hi', 'there!'],
         ]);
 
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('foo=bar&baz%5B0%5D=hi&baz%5B1%5D=there%21', $response->getBodyAsString());
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame('foo=bar&baz%5B0%5D=hi&baz%5B1%5D=there%21', $response->getBodyAsString());
         // Check the header was added automatically
-        $this->assertEquals('application/x-www-form-urlencoded', $response->getHeaderLine('X-Encoding'));
+        $this->assertSame('application/x-www-form-urlencoded', $response->getHeaderLine('X-Encoding'));
     }
 
     public function test put form data(): void
@@ -128,10 +128,10 @@ class HttpTest extends TestCase
             'baz' => ['hi', 'there!'],
         ]);
 
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('foo=bar&baz%5B0%5D=hi&baz%5B1%5D=there%21', $response->getBodyAsString());
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame('foo=bar&baz%5B0%5D=hi&baz%5B1%5D=there%21', $response->getBodyAsString());
         // Check the header was added automatically
-        $this->assertEquals('application/x-www-form-urlencoded', $response->getHeaderLine('X-Encoding'));
+        $this->assertSame('application/x-www-form-urlencoded', $response->getHeaderLine('X-Encoding'));
     }
 
     public function test with header(): void
@@ -151,8 +151,8 @@ class HttpTest extends TestCase
     {
         $http1 = Http::mock([
             function (RequestInterface $request, array $options): ResponseInterface {
-                $this->assertEquals(1., $options['timeout']);
-                $this->assertEquals(2., $options['connect_timeout']);
+                $this->assertSame(1., $options['timeout']);
+                $this->assertSame(2., $options['connect_timeout']);
                 return new Response(200);
             },
         ]);
@@ -165,7 +165,7 @@ class HttpTest extends TestCase
     {
         $http1 = Http::mock([
             function (RequestInterface $request, array $options): ResponseInterface {
-                $this->assertEquals('foo=bar', $request->getUri()->getQuery());
+                $this->assertSame('foo=bar', $request->getUri()->getQuery());
                 return new Response(200);
             },
         ]);
@@ -178,7 +178,7 @@ class HttpTest extends TestCase
     {
         $http1 = Http::mock([
             function (RequestInterface $request, array $options): ResponseInterface {
-                $this->assertEquals('foo=bar', $request->getUri()->getQuery());
+                $this->assertSame('foo=bar', $request->getUri()->getQuery());
                 return new Response(200);
             },
         ]);
@@ -191,7 +191,7 @@ class HttpTest extends TestCase
     {
         $http1 = Http::mock([
             function (RequestInterface $request, array $options): ResponseInterface {
-                $this->assertEquals('tcp://localhost:8125', $options['proxy']);
+                $this->assertSame('tcp://localhost:8125', $options['proxy']);
                 return new Response(200);
             },
         ]);

@@ -11,7 +11,7 @@ class HttpResponseTest extends TestCase
     public function test get body as string(): void
     {
         $response = new HttpResponse(200, [], 'foo');
-        $this->assertEquals('foo', $response->getBodyAsString());
+        $this->assertSame('foo', $response->getBodyAsString());
     }
 
     public function test get body as string always rewinds the stream(): void
@@ -19,10 +19,10 @@ class HttpResponseTest extends TestCase
         $response = new HttpResponse(200, [], 'foo');
 
         $response->getBody()->getContents(); // this will move the cursor of the stream to the end
-        $this->assertEquals('', $response->getBody()->getContents()); // we check that: the content returned is now empty
+        $this->assertSame('', $response->getBody()->getContents()); // we check that: the content returned is now empty
 
         // Yet `getBodyAsString()` always works
-        $this->assertEquals('foo', $response->getBodyAsString());
+        $this->assertSame('foo', $response->getBodyAsString());
     }
 
     public function test get data decodes JSON(): void
